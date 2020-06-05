@@ -8,4 +8,4 @@ Author: Tomasz Poliszuk
 Section: Tweaks
 dev: tomaszpoliszuk
 Tag: purpose::extension, compatible::ios13
-Icon: file:///Library/PreferenceBundles/AlertControllerSettings.bundle/AlertController@2x.png
+Icon: file:///Library/PreferenceBundles/AlertControllerSettings.bundle/icons/AlertController@3x.png
