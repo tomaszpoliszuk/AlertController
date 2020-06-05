@@ -40,18 +40,23 @@
 }
 
 -(void)TweakSourceCode {
-	NSURL *TweakSourceCode = [NSURL URLWithString:@"https://github.com/tomaszpoliszuk/AlertController"];
-	[[UIApplication sharedApplication] openURL:TweakSourceCode options:@{} completionHandler:nil];
+	NSURL *tweakSourceCode = [NSURL URLWithString:@"https://github.com/tomaszpoliszuk/AlertController"];
+	[[UIApplication sharedApplication] openURL:tweakSourceCode options:@{} completionHandler:nil];
 }
 
 -(void)TweakReportIssue {
-	NSURL *TweakReportIssue = [NSURL URLWithString:@"https://github.com/tomaszpoliszuk/AlertController/issues/new"];
-	[[UIApplication sharedApplication] openURL:TweakReportIssue options:@{} completionHandler:nil];
+	NSURL *tweakReportIssue = [NSURL URLWithString:@"https://github.com/tomaszpoliszuk/AlertController/issues/new"];
+	[[UIApplication sharedApplication] openURL:tweakReportIssue options:@{} completionHandler:nil];
 }
 
--(void)TomaszPoliszukGithub {
-	NSURL *TomaszPoliszukGithub = [NSURL URLWithString:@"https://github.com/tomaszpoliszuk/"];
-	[[UIApplication sharedApplication] openURL:TomaszPoliszukGithub options:@{} completionHandler:nil];
+-(void)TomaszPoliszukOnGithub {
+	NSURL *tomaszPoliszukOnGithub = [NSURL URLWithString:@"https://github.com/tomaszpoliszuk/"];
+	[[UIApplication sharedApplication] openURL:tomaszPoliszukOnGithub options:@{} completionHandler:nil];
+}
+
+-(void)TomaszPoliszukOnTwitter {
+	NSURL *tomaszPoliszukOnTwitter = [NSURL URLWithString:@"https://twitter.com/tomaszpoliszuk/"];
+	[[UIApplication sharedApplication] openURL:tomaszPoliszukOnTwitter options:@{} completionHandler:nil];
 }
 
 @end

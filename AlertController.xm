@@ -1,5 +1,3 @@
-NSString *settingsChangedNotification = @"com.tomaszpoliszuk.alertcontroller/TweakSettingsChanged";
-NSString *kUserSettingsFile = @"/var/mobile/Library/Preferences/com.tomaszpoliszuk.alertcontroller.plist";
 NSString *domainString = @"com.tomaszpoliszuk.alertcontroller";
 
 NSMutableDictionary *tweakSettings;
@@ -40,7 +38,7 @@ void TweakSettingsChanged() {
 // Found in https://github.com/EthanRDoesMC/Dawn/commit/847cb5192dae9138a893e394da825e86be561a6b
 	if ([[[[NSProcessInfo processInfo] arguments] objectAtIndex:0] containsString:@"/Application"] || [[[[NSProcessInfo processInfo] arguments] objectAtIndex:0] containsString:@"SpringBoard.app"]) {
 		TweakSettingsChanged();
-		CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(), NULL, (CFNotificationCallback)TweakSettingsChanged, CFSTR("com.tomaszpoliszuk.alertcontroller/TweakSettingsChanged"), NULL, CFNotificationSuspensionBehaviorDeliverImmediately);
+		CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(), NULL, (CFNotificationCallback)TweakSettingsChanged, CFSTR("com.tomaszpoliszuk.alertcontroller.settingschanged"), NULL, CFNotificationSuspensionBehaviorDeliverImmediately);
 		%init; // == %init(_ungrouped);
 	}
 }

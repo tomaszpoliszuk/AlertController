@@ -11,7 +11,7 @@
 			key = "enableTweak";
 			label = "Enable Tweak";
 			defaults = com.tomaszpoliszuk.alertcontroller;
-			PostNotification = "com.tomaszpoliszuk.alertcontroller/TweakSettingsChanged";
+			PostNotification = "com.tomaszpoliszuk.alertcontroller.settingschanged";
 		},
 		{
 			cell = PSGroupCell;
@@ -24,7 +24,7 @@
 			key = "dismissByTappingOutside";
 			label = "Dismiss by tapping outside";
 			defaults = com.tomaszpoliszuk.alertcontroller;
-			PostNotification = "com.tomaszpoliszuk.alertcontroller/TweakSettingsChanged";
+			PostNotification = "com.tomaszpoliszuk.alertcontroller.settingschanged";
 			icon = "/Library/PreferenceBundles/AlertControllerSettings.bundle/icons/outside.png";
 		},
 		{
@@ -33,7 +33,7 @@
 			key = "hideCancelAction";
 			label = "Hide Cancel Action";
 			defaults = com.tomaszpoliszuk.alertcontroller;
-			PostNotification = "com.tomaszpoliszuk.alertcontroller/TweakSettingsChanged";
+			PostNotification = "com.tomaszpoliszuk.alertcontroller.settingschanged";
 			icon = "/Library/PreferenceBundles/AlertControllerSettings.bundle/icons/cancel.png";
 		},
 		{
@@ -58,15 +58,21 @@
 		},
 		{
 			cell = PSButtonCell;
-			label = "Report Issue";
+			label = "Report Issue (on GitHub)";
 			action = TweakReportIssue;
 			icon = "/Library/PreferenceBundles/AlertControllerSettings.bundle/icons/bug.png";
 		},
 		{
 			cell = PSButtonCell;
-			label = "Tomasz Poliszuk @ GitHub";
-			action = TomaszPoliszukGithub;
+			label = "Tomasz Poliszuk @ Github";
+			action = TomaszPoliszukOnGithub;
 			icon = "/Library/PreferenceBundles/AlertControllerSettings.bundle/icons/github.png";
+		},
+		{
+			cell = PSButtonCell;
+			label = "Tomasz Poliszuk @ Twitter";
+			action = TomaszPoliszukOnTwitter;
+			icon = "/Library/PreferenceBundles/AlertControllerSettings.bundle/icons/twitter.png";
 		}
 	);
 }
