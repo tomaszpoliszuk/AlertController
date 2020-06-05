@@ -28,7 +28,7 @@ void TweakSettingsChanged() {
 %hook UIAlertControllerVisualStyle
 -(bool)hideCancelAction:(id)arg1 inAlertController:(id)arg2 {
 	bool origValue = %orig; // == %orig(arg1, arg2);
-	if ( enableTweak ) {
+	if ( enableTweak && dismissByTappingOutside ) {
 		return hideCancelAction;
 	} else {
 		return origValue;
