@@ -1,0 +1,11 @@
+Package: com.tomaszpoliszuk.alertcontroller
+Depends: firmware (>= 13.0), mobilesubstrate, preferenceloader
+Name: Alert Controller
+Version: 1.0
+Architecture: iphoneos-arm
+Description: Alert Controller
+Author: Tomasz Poliszuk
+Section: Tweaks
+dev: tomaszpoliszuk
+Tag: purpose::extension, compatible::ios13
+Icon: file:///Library/PreferenceBundles/AlertControllerSettings.bundle/AlertController@2x.png

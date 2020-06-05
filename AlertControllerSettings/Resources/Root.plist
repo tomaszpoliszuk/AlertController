@@ -1,0 +1,65 @@
+{
+	title = "Alert Controller";
+	items = (
+		{
+			cell = PSGroupCell;
+			label = "Enable Tweak";
+		},
+		{
+			cell = PSSwitchCell;
+			default = false;
+			key = "EnableTweak";
+			label = "Enable Tweak";
+			defaults = com.tomaszpoliszuk.alertcontroller;
+			PostNotification = "com.tomaszpoliszuk.alertcontroller/TweakSettingsChanged";
+		},
+		{
+			cell = PSGroupCell;
+			label = "Alert Controller";
+		},
+		{
+			cell = PSSwitchCell;
+			default = false;
+			key = "DismissByTappingOutside";
+			label = "Dismiss by tapping outside";
+			defaults = com.tomaszpoliszuk.alertcontroller;
+			PostNotification = "com.tomaszpoliszuk.alertcontroller/TweakSettingsChanged";
+		},
+		{
+			cell = PSSwitchCell;
+			default = false;
+			key = "HideCancelAction";
+			label = "Hide Cancel Action";
+			defaults = com.tomaszpoliszuk.alertcontroller;
+			PostNotification = "com.tomaszpoliszuk.alertcontroller/TweakSettingsChanged";
+		},
+		{
+			cell = PSGroupCell;
+			label = "Test how Alert will look";
+		},
+		{
+			cell = PSButtonCell;
+			label = "Example Alert";
+			action = showExampleAlert;
+		},
+		{
+			cell = PSGroupCell;
+			label = "Related Links";
+		},
+		{
+			cell = PSButtonCell;
+			label = "Source Code";
+			action = TweakSourceCode;
+		},
+		{
+			cell = PSButtonCell;
+			label = "Report Issue";
+			action = TweakReportIssue;
+		},
+		{
+			cell = PSButtonCell;
+			label = "Tomasz Poliszuk @ GitHub";
+			action = TomaszPoliszukGithub;
+		}
+	);
+}
