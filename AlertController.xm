@@ -9,6 +9,7 @@ static BOOL dismissByTappingOutside;
 static BOOL hideCancelAction;
 
 void TweakSettingsChanged() {
+	NSUserDefaults *tweakSettings = [[NSUserDefaults alloc] initWithSuiteName:domainString];
 	enableTweak = [[tweakSettings objectForKey:@"enableTweak"] boolValue];
 	dismissByTappingOutside = [[tweakSettings objectForKey:@"dismissByTappingOutside"] boolValue];
 	hideCancelAction = [[tweakSettings objectForKey:@"hideCancelAction"] boolValue];
@@ -38,7 +39,6 @@ void TweakSettingsChanged() {
 %ctor {
 // Found in https://github.com/EthanRDoesMC/Dawn/commit/847cb5192dae9138a893e394da825e86be561a6b
 	if ([[[[NSProcessInfo processInfo] arguments] objectAtIndex:0] containsString:@"/Application"] || [[[[NSProcessInfo processInfo] arguments] objectAtIndex:0] containsString:@"SpringBoard.app"]) {
-		NSUserDefaults *tweakSettings = [[NSUserDefaults alloc] initWithSuiteName:domainString];
 		TweakSettingsChanged();
 		CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(), NULL, (CFNotificationCallback)TweakSettingsChanged, CFSTR("com.tomaszpoliszuk.alertcontroller/TweakSettingsChanged"), NULL, CFNotificationSuspensionBehaviorDeliverImmediately);
 		%init; // == %init(_ungrouped);
