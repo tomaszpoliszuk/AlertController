@@ -11,7 +11,7 @@
 		<key>detail</key>
 		<string>AlertControllerSettings</string>
 		<key>icon</key>
-		<string>AlertController.png</string>
+		<string>icons/AlertController.png</string>
 		<key>isController</key>
 		<true/>
 		<key>label</key>

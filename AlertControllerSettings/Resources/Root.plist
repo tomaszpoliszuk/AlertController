@@ -25,6 +25,7 @@
 			label = "Dismiss by tapping outside";
 			defaults = com.tomaszpoliszuk.alertcontroller;
 			PostNotification = "com.tomaszpoliszuk.alertcontroller/TweakSettingsChanged";
+			icon = "/Library/PreferenceBundles/AlertControllerSettings.bundle/icons/outside.png";
 		},
 		{
 			cell = PSSwitchCell;
@@ -33,6 +34,7 @@
 			label = "Hide Cancel Action";
 			defaults = com.tomaszpoliszuk.alertcontroller;
 			PostNotification = "com.tomaszpoliszuk.alertcontroller/TweakSettingsChanged";
+			icon = "/Library/PreferenceBundles/AlertControllerSettings.bundle/icons/cancel.png";
 		},
 		{
 			cell = PSGroupCell;
@@ -42,6 +44,7 @@
 			cell = PSButtonCell;
 			label = "Example Alert";
 			action = showExampleAlert;
+			icon = "/Library/PreferenceBundles/AlertControllerSettings.bundle/icons/AlertController.png";
 		},
 		{
 			cell = PSGroupCell;
@@ -51,16 +54,19 @@
 			cell = PSButtonCell;
 			label = "Source Code";
 			action = TweakSourceCode;
+			icon = "/Library/PreferenceBundles/AlertControllerSettings.bundle/icons/sourcecode.png";
 		},
 		{
 			cell = PSButtonCell;
 			label = "Report Issue";
 			action = TweakReportIssue;
+			icon = "/Library/PreferenceBundles/AlertControllerSettings.bundle/icons/bug.png";
 		},
 		{
 			cell = PSButtonCell;
 			label = "Tomasz Poliszuk @ GitHub";
 			action = TomaszPoliszukGithub;
+			icon = "/Library/PreferenceBundles/AlertControllerSettings.bundle/icons/github.png";
 		}
 	);
 }
