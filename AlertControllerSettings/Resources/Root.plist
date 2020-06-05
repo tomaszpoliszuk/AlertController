@@ -8,7 +8,7 @@
 		{
 			cell = PSSwitchCell;
 			default = false;
-			key = "EnableTweak";
+			key = "enableTweak";
 			label = "Enable Tweak";
 			defaults = com.tomaszpoliszuk.alertcontroller;
 			PostNotification = "com.tomaszpoliszuk.alertcontroller/TweakSettingsChanged";
@@ -20,7 +20,7 @@
 		{
 			cell = PSSwitchCell;
 			default = false;
-			key = "DismissByTappingOutside";
+			key = "dismissByTappingOutside";
 			label = "Dismiss by tapping outside";
 			defaults = com.tomaszpoliszuk.alertcontroller;
 			PostNotification = "com.tomaszpoliszuk.alertcontroller/TweakSettingsChanged";
@@ -28,7 +28,7 @@
 		{
 			cell = PSSwitchCell;
 			default = false;
-			key = "HideCancelAction";
+			key = "hideCancelAction";
 			label = "Hide Cancel Action";
 			defaults = com.tomaszpoliszuk.alertcontroller;
 			PostNotification = "com.tomaszpoliszuk.alertcontroller/TweakSettingsChanged";
