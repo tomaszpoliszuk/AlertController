@@ -27,10 +27,9 @@
 
 - (void) showExampleAlert
 {
-	UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Example Alert" message:@"This is how your alert will look like." preferredStyle:UIAlertControllerStyleAlert];
+	UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Example Alert" message:@"(V)(;,;)(V) Why Not Zoidberg?" preferredStyle:UIAlertControllerStyleAlert];
 
-	UIAlertAction *ok = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action)
-	{
+	UIAlertAction *ok = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
 	}];
 
 	UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
