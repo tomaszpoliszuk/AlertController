@@ -54,9 +54,4 @@
 	[[UIApplication sharedApplication] openURL:tomaszPoliszukOnGithub options:@{} completionHandler:nil];
 }
 
--(void)TomaszPoliszukOnTwitter {
-	NSURL *tomaszPoliszukOnTwitter = [NSURL URLWithString:@"https://twitter.com/tomaszpoliszuk/"];
-	[[UIApplication sharedApplication] openURL:tomaszPoliszukOnTwitter options:@{} completionHandler:nil];
-}
-
 @end

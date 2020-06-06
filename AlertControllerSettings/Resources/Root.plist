@@ -67,12 +67,6 @@
 			label = "Tomasz Poliszuk @ Github";
 			action = TomaszPoliszukOnGithub;
 			icon = "/Library/PreferenceBundles/AlertControllerSettings.bundle/icons/github.png";
-		},
-		{
-			cell = PSButtonCell;
-			label = "Tomasz Poliszuk @ Twitter";
-			action = TomaszPoliszukOnTwitter;
-			icon = "/Library/PreferenceBundles/AlertControllerSettings.bundle/icons/twitter.png";
 		}
 	);
 }
