@@ -16,7 +16,7 @@
 		{
 			cell = PSGroupCell;
 			label = "Alert Controller";
-			footerText = "'Hide Cancel Action' requires 'Dismiss by tapping outside' to be enabled to prevent user from removing ability to Cancel Action. This is by design.";
+			footerText = "When 'Dismiss by tapping outside' is disabled 'Hide Cancel Action' will remain disabled to prevent user from removing ability to Cancel Action.";
 		},
 		{
 			cell = PSSwitchCell;
