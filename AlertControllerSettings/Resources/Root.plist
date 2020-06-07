@@ -16,7 +16,7 @@
 		{
 			cell = PSGroupCell;
 			label = "Alert Controller";
-			footerText = "When 'Dismiss by tapping outside' is disabled 'Hide Cancel Action' will remain disabled to prevent user from removing ability to Cancel Action.";
+			footerText = "When 'Dismiss by tapping outside' is disabled 'Hide cancel action' will remain disabled to prevent user from removing ability to cancel action.";
 		},
 		{
 			cell = PSSwitchCell;
@@ -30,8 +30,17 @@
 		{
 			cell = PSSwitchCell;
 			default = false;
+			key = "displayButtonsVertically";
+			label = "Display buttons vertically";
+			defaults = com.tomaszpoliszuk.alertcontroller;
+			PostNotification = "com.tomaszpoliszuk.alertcontroller.settingschanged";
+			icon = "/Library/PreferenceBundles/AlertControllerSettings.bundle/icons/vertical.png";
+		},
+		{
+			cell = PSSwitchCell;
+			default = false;
 			key = "hideCancelAction";
-			label = "Hide Cancel Action";
+			label = "Hide cancel action";
 			defaults = com.tomaszpoliszuk.alertcontroller;
 			PostNotification = "com.tomaszpoliszuk.alertcontroller.settingschanged";
 			icon = "/Library/PreferenceBundles/AlertControllerSettings.bundle/icons/cancel.png";

@@ -4,7 +4,8 @@
 
 **Possibilities:**
 - Dismiss by tapping outside
-- Hide Cancel Action
+- Display buttons vertically
+- Hide cancel action
 
 Configure options from Settings.
 

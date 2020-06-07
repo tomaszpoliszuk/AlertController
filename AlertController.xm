@@ -4,12 +4,14 @@ NSMutableDictionary *tweakSettings;
 
 static BOOL enableTweak;
 static BOOL dismissByTappingOutside;
+static BOOL displayButtonsVertically;
 static BOOL hideCancelAction;
 
 void TweakSettingsChanged() {
 	NSUserDefaults *tweakSettings = [[NSUserDefaults alloc] initWithSuiteName:domainString];
 	enableTweak = [[tweakSettings objectForKey:@"enableTweak"] boolValue];
 	dismissByTappingOutside = [[tweakSettings objectForKey:@"dismissByTappingOutside"] boolValue];
+	displayButtonsVertically = [[tweakSettings objectForKey:@"displayButtonsVertically"] boolValue];
 	hideCancelAction = [[tweakSettings objectForKey:@"hideCancelAction"] boolValue];
 }
 
@@ -24,6 +26,13 @@ void TweakSettingsChanged() {
 %end
 
 %hook _UIAlertControllerView
+-(void)_configureActionGroupViewToAllowHorizontalLayout:(bool)arg1 {
+	if ( enableTweak && displayButtonsVertically ) {
+		%orig(!displayButtonsVertically);
+	} else {
+		%orig;
+	}
+}
 -(bool)showsCancelAction {
 	if ( enableTweak && !dismissByTappingOutside && !hideCancelAction ) {
 		return !hideCancelAction;
