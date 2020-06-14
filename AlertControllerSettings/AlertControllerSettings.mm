@@ -27,15 +27,20 @@
 
 - (void) showExampleAlert
 {
-	UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Example Alert" message:@"(V)(;,;)(V) Why Not Zoidberg?" preferredStyle:UIAlertControllerStyleAlert];
+	UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"(V)(;,;)(V)" message:@"Why Not Zoidberg?" preferredStyle:UIAlertControllerStyleAlert];
 
-	UIAlertAction *ok = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-	}];
-
-	UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
-	[alert addAction:ok];
-	[alert addAction:cancel];
+	[alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
+	[alert addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil]];
 	[self presentViewController:alert animated:YES completion:nil];
+}
+- (void) showExampleActionSheet
+{
+
+	UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:@"( ͡° ͜ʖ ͡°)" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+	[actionSheet addAction:[UIAlertAction actionWithTitle:@"(╯°益°)╯彡┻━┻" style:UIAlertActionStyleDefault handler:nil]];
+	[actionSheet addAction:[UIAlertAction actionWithTitle:@"( ͡° ͜ʖ ͡°) ( ͡⊙ ͜ʖ ͡⊙) ( ͡◉ ͜ʖ ͡◉ )" style:UIAlertActionStyleDefault handler:nil]];
+	[actionSheet addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil]];
+	[self presentViewController:actionSheet animated:YES completion:nil];
 }
 
 -(void)TweakSourceCode {

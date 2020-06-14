@@ -56,6 +56,12 @@
 			icon = "/Library/PreferenceBundles/AlertControllerSettings.bundle/icons/AlertController.png";
 		},
 		{
+			cell = PSButtonCell;
+			label = "Example Action Sheet";
+			action = showExampleActionSheet;
+			icon = "/Library/PreferenceBundles/AlertControllerSettings.bundle/icons/AlertController.png";
+		},
+		{
 			cell = PSGroupCell;
 			label = "Related Links";
 		},
