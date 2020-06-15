@@ -76,19 +76,6 @@ void TweakSettingsChanged() {
 }
 %end
 
-%hook _UIAlertControllerInterfaceActionGroupView
-%new
--(void)updateTraitOverride {
-	[self setOverrideUserInterfaceStyle:uiStyle];
-}
--(void)didMoveToWindow {
-	if (uiStyle > 0) {
-		[self setOverrideUserInterfaceStyle:uiStyle];
-	}
-	%orig;
-}
-%end
-
 
 %hook _UIAlertControllerView
 -(void)_configureActionGroupViewToAllowHorizontalLayout:(bool)arg1 {
@@ -107,6 +94,21 @@ void TweakSettingsChanged() {
 	} else {
 		return origValue;
 	}
+}
+%end
+
+%hook _UIAlertControllerInterfaceActionGroupView
+%new
+-(void)updateTraitOverride {
+	if ( enableTweak && uiStyle ) {
+		[self setOverrideUserInterfaceStyle:uiStyle];
+	}
+}
+-(void)didMoveToWindow {
+	if (enableTweak && uiStyle > 0) {
+		[self setOverrideUserInterfaceStyle:uiStyle];
+	}
+	%orig;
 }
 %end
 
