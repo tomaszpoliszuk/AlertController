@@ -24,10 +24,6 @@ static int uiStyle;
 -(void)updateTraitOverride;
 @end
 
-@interface _UIContextMenuActionsListView : UIInterfaceActionGroupView
--(void)updateTraitOverride;
-@end
-
 @interface _UIAlertControllerInterfaceActionGroupView : UIInterfaceActionGroupView
 -(void)updateTraitOverride;
 @end
@@ -80,7 +76,7 @@ void TweakSettingsChanged() {
 }
 %end
 
-%hook UIInterfaceActionGroupView
+%hook _UIAlertControllerInterfaceActionGroupView
 %new
 -(void)updateTraitOverride {
 	[self setOverrideUserInterfaceStyle:uiStyle];
