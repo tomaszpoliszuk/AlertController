@@ -28,14 +28,12 @@
 - (void) showExampleAlert
 {
 	UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"(V)(;,;)(V)" message:@"Why Not Zoidberg?" preferredStyle:UIAlertControllerStyleAlert];
-
 	[alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
 	[alert addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil]];
 	[self presentViewController:alert animated:YES completion:nil];
 }
 - (void) showExampleActionSheet
 {
-
 	UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:@"( ͡° ͜ʖ ͡°)" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
 	[actionSheet addAction:[UIAlertAction actionWithTitle:@"(╯°益°)╯彡┻━┻" style:UIAlertActionStyleDefault handler:nil]];
 	[actionSheet addAction:[UIAlertAction actionWithTitle:@"( ͡° ͜ʖ ͡°) ( ͡⊙ ͜ʖ ͡⊙) ( ͡◉ ͜ʖ ͡◉ )" style:UIAlertActionStyleDefault handler:nil]];
