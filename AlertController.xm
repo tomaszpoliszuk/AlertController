@@ -8,6 +8,7 @@ static int uiStyle;
 
 static BOOL dismissByTappingOutside;
 static BOOL displayButtonsVertically;
+static BOOL showIcons;
 static BOOL hideCancelAction;
 
 //	static long long setAlertStyle;
@@ -38,6 +39,7 @@ void TweakSettingsChanged() {
 
 	dismissByTappingOutside = [[tweakSettings objectForKey:@"dismissByTappingOutside"] boolValue];
 	displayButtonsVertically = [[tweakSettings objectForKey:@"displayButtonsVertically"] boolValue];
+	showIcons = [[tweakSettings objectForKey:@"showIcons"] boolValue];
 	hideCancelAction = [[tweakSettings objectForKey:@"hideCancelAction"] boolValue];
 
 //	setAlertStyle = [[tweakSettings valueForKey:@"setAlertStyle"] integerValue];
@@ -94,6 +96,17 @@ void TweakSettingsChanged() {
 		return !hideCancelAction;
 	} else if ( enableTweak && dismissByTappingOutside && hideCancelAction ) {
 		return !hideCancelAction;
+	} else {
+		return origValue;
+	}
+}
+%end
+
+%hook UIAlertAction
+- (long long)image {
+	long long origValue = %orig;
+	if ( enableTweak && !showIcons ) {
+		return nil;
 	} else {
 		return origValue;
 	}

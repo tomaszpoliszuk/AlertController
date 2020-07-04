@@ -56,6 +56,15 @@
 		},
 		{
 			cell = PSSwitchCell;
+			default = 0;
+			key = "showIcons";
+			label = "Show Icons";
+			defaults = com.tomaszpoliszuk.alertcontroller;
+			PostNotification = "com.tomaszpoliszuk.alertcontroller.settingschanged";
+			icon = "/Library/PreferenceBundles/AlertControllerSettings.bundle/icons/icons.png";
+		},
+		{
+			cell = PSSwitchCell;
 			key = "hideCancelAction";
 			label = "Hide cancel action";
 			default = 0;
