@@ -8,6 +8,7 @@
 			default = 0;
 			defaults = com.tomaszpoliszuk.alertcontroller;
 			PostNotification = "com.tomaszpoliszuk.alertcontroller.settingschanged";
+			height = 55;
 		},
 		{
 			cell = PSGroupCell;
@@ -30,6 +31,7 @@
 				"Light",
 				"Dark"
 			);
+			height = 55;
 		},
 		{
 			cell = PSGroupCell;
@@ -107,6 +109,7 @@
 				"Action Sheet (Default)",
 				"Alert"
 			);
+			height = 55;
 		},
 		{
 			cell = PSGroupCell;
