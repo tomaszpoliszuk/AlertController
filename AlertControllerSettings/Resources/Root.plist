@@ -122,6 +122,7 @@
 			label = "Square Corners";
 			defaults = com.tomaszpoliszuk.alertcontroller;
 			PostNotification = "com.tomaszpoliszuk.alertcontroller.settingschanged";
+			icon = "/Library/PreferenceBundles/AlertControllerSettings.bundle/icons/AlertSquare.png";
 		},
 		{
 			cell = PSSwitchCell;
@@ -130,6 +131,7 @@
 			label = "Remove Separators";
 			defaults = com.tomaszpoliszuk.alertcontroller;
 			PostNotification = "com.tomaszpoliszuk.alertcontroller.settingschanged";
+			icon = "/Library/PreferenceBundles/AlertControllerSettings.bundle/icons/AlertSeparateless.png";
 		},
 		{
 			cell = PSGroupCell;
@@ -142,6 +144,7 @@
 			label = "Square Corners";
 			defaults = com.tomaszpoliszuk.alertcontroller;
 			PostNotification = "com.tomaszpoliszuk.alertcontroller.settingschanged";
+			icon = "/Library/PreferenceBundles/AlertControllerSettings.bundle/icons/ActionSheetSquare.png";
 		},
 		{
 			cell = PSGroupCell;
@@ -157,7 +160,7 @@
 			cell = PSButtonCell;
 			label = "Test Text Alert";
 			action = showExampleTextAlert;
-			icon = "/Library/PreferenceBundles/AlertControllerSettings.bundle/icons/AlertController.png";
+			icon = "/Library/PreferenceBundles/AlertControllerSettings.bundle/icons/AlertText.png";
 		},
 		{
 			cell = PSButtonCell;
