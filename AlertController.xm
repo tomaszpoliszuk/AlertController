@@ -18,6 +18,8 @@ static long long setActionSheetStyle;
 static long long setActionSheetStyleOutput;
 
 static BOOL squareCornersInAlert;
+static BOOL removeSeparatorsInAlert;
+
 static BOOL squareCornersInActionSheet;
 
 @interface UIView (AlertController)
@@ -61,6 +63,8 @@ void TweakSettingsChanged() {
 	setActionSheetStyle = [[tweakSettings valueForKey:@"setActionSheetStyle"] integerValue];
 
 	squareCornersInAlert = [[tweakSettings objectForKey:@"squareCornersInAlert"] boolValue];
+	removeSeparatorsInAlert = [[tweakSettings objectForKey:@"removeSeparatorsInAlert"] boolValue];
+
 	squareCornersInActionSheet = [[tweakSettings objectForKey:@"squareCornersInActionSheet"] boolValue];
 }
 
@@ -151,6 +155,14 @@ void TweakSettingsChanged() {
 	double origValue = %orig;
 	if ( enableTweak && squareCornersInAlert ) {
 		return 0;
+	} else {
+		return origValue;
+	}
+}
+- (id)newActionSeparatorViewForGroupViewState:(id)arg1 {
+	id origValue = %orig;
+	if ( enableTweak && removeSeparatorsInAlert ) {
+		return nil;
 	} else {
 		return origValue;
 	}

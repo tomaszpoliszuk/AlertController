@@ -121,6 +121,14 @@
 			PostNotification = "com.tomaszpoliszuk.alertcontroller.settingschanged";
 		},
 		{
+			cell = PSSwitchCell;
+			default = 0;
+			key = "removeSeparatorsInAlert";
+			label = "Remove Separators";
+			defaults = com.tomaszpoliszuk.alertcontroller;
+			PostNotification = "com.tomaszpoliszuk.alertcontroller.settingschanged";
+		},
+		{
 			cell = PSGroupCell;
 			label = "Action Sheet Style";
 		},
