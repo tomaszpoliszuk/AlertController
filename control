@@ -1,7 +1,7 @@
 Package: com.tomaszpoliszuk.alertcontroller
 Depends: firmware (>= 13.0), mobilesubstrate, preferenceloader
 Name: Alert Controller
-Version: 1.2
+Version: 1.3
 Architecture: iphoneos-arm
 Description: Alert Controller - change UX and UI of your Alerts and Action Sheets
 Homepage: http://moreinfo.thebigboss.org/moreinfo/depiction.php?file=alertcontrollerDp

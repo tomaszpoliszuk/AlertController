@@ -3,11 +3,14 @@
 **Requires iOS greater or equal to 13**
 
 **Possibilities:**
+- Choose UI Style of Alerts and Action Sheets
 - Dismiss by tapping outside
 - Display buttons vertically
+- Show Icons
 - Hide cancel action
-- Choose UI Style of Alerts and Action Sheets
-- Choose Style of Alerts and Action Sheets (they can use each other appearance)
+- Choose Style of Action Sheets (use Alert style instead)
+- Square Corners
+- Remove Separators (in Alert style only)
 
 Configure options from Settings.
 
