@@ -53,19 +53,28 @@
 	[self presentViewController:actionSheet animated:YES completion:nil];
 }
 
--(void)TweakSourceCode {
-	NSURL *tweakSourceCode = [NSURL URLWithString:@"https://github.com/tomaszpoliszuk/AlertController"];
-	[[UIApplication sharedApplication] openURL:tweakSourceCode options:@{} completionHandler:nil];
+-(void)sourceCode {
+	NSURL *sourceCode = [NSURL URLWithString:@"https://github.com/tomaszpoliszuk/AlertController"];
+	[[UIApplication sharedApplication] openURL:sourceCode options:@{} completionHandler:nil];
 }
 
--(void)TweakReportIssue {
-	NSURL *tweakReportIssue = [NSURL URLWithString:@"https://github.com/tomaszpoliszuk/AlertController/issues/new"];
-	[[UIApplication sharedApplication] openURL:tweakReportIssue options:@{} completionHandler:nil];
+-(void)reportIssueAtGithub {
+	NSURL *reportIssueAtGithub = [NSURL URLWithString:@"https://github.com/tomaszpoliszuk/AlertController/issues/new"];
+	[[UIApplication sharedApplication] openURL:reportIssueAtGithub options:@{} completionHandler:nil];
 }
 
--(void)TomaszPoliszukOnGithub {
-	NSURL *tomaszPoliszukOnGithub = [NSURL URLWithString:@"https://github.com/tomaszpoliszuk/"];
-	[[UIApplication sharedApplication] openURL:tomaszPoliszukOnGithub options:@{} completionHandler:nil];
+-(void)TomaszPoliszukAtGithub {
+	UIApplication *application = [UIApplication sharedApplication];
+	NSString *username = @"tomaszpoliszuk";
+	NSURL *githubWebsite = [NSURL URLWithString:[@"https://github.com/" stringByAppendingString:username]];
+	[application openURL:githubWebsite options:@{} completionHandler:nil];
+}
+
+-(void)TomaszPoliszukAtTwitter {
+	UIApplication *application = [UIApplication sharedApplication];
+	NSString *username = @"tomaszpoliszuk";
+	NSURL *twitterWebsite = [NSURL URLWithString:[@"https://mobile.twitter.com/" stringByAppendingString:username]];
+	[application openURL:twitterWebsite options:@{} completionHandler:nil];
 }
 
 @end
