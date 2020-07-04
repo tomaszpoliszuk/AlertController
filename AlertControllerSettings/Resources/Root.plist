@@ -3,9 +3,9 @@
 	items = (
 		{
 			cell = PSSwitchCell;
-			default = false;
 			key = "enableTweak";
 			label = "Enable Tweak";
+			default = 0;
 			defaults = com.tomaszpoliszuk.alertcontroller;
 			PostNotification = "com.tomaszpoliszuk.alertcontroller.settingschanged";
 		},
@@ -15,9 +15,9 @@
 		},
 		{
 			cell = PSSegmentCell;
-			default = 0;
 			key = "uiStyle";
 			label = "UI Style";
+			default = 0;
 			defaults = com.tomaszpoliszuk.alertcontroller;
 			PostNotification = "com.tomaszpoliszuk.alertcontroller.settingschanged";
 			validValues = (
@@ -38,27 +38,27 @@
 		},
 		{
 			cell = PSSwitchCell;
-			default = false;
 			key = "dismissByTappingOutside";
 			label = "Dismiss by tapping outside";
+			default = 0;
 			defaults = com.tomaszpoliszuk.alertcontroller;
 			PostNotification = "com.tomaszpoliszuk.alertcontroller.settingschanged";
 			icon = "/Library/PreferenceBundles/AlertControllerSettings.bundle/icons/outside.png";
 		},
 		{
 			cell = PSSwitchCell;
-			default = false;
 			key = "displayButtonsVertically";
 			label = "Display buttons vertically";
+			default = 0;
 			defaults = com.tomaszpoliszuk.alertcontroller;
 			PostNotification = "com.tomaszpoliszuk.alertcontroller.settingschanged";
 			icon = "/Library/PreferenceBundles/AlertControllerSettings.bundle/icons/vertical.png";
 		},
 		{
 			cell = PSSwitchCell;
-			default = false;
 			key = "hideCancelAction";
 			label = "Hide cancel action";
+			default = 0;
 			defaults = com.tomaszpoliszuk.alertcontroller;
 			PostNotification = "com.tomaszpoliszuk.alertcontroller.settingschanged";
 			icon = "/Library/PreferenceBundles/AlertControllerSettings.bundle/icons/cancel.png";
@@ -69,9 +69,8 @@
 		},
 		{
 			cell = PSSegmentCell;
-			default = 9;
 			key = "setAlertStyle";
-			label = "Alert Style";
+			default = 9;
 			defaults = com.tomaszpoliszuk.alertcontroller;
 			PostNotification = "com.tomaszpoliszuk.alertcontroller.settingschanged";
 			validValues = (
@@ -84,20 +83,13 @@
 			);
 		},
 		{
-			cell = PSButtonCell;
-			label = "Test Alert";
-			action = showExampleAlert;
-			icon = "/Library/PreferenceBundles/AlertControllerSettings.bundle/icons/AlertController.png";
-		},
-		{
 			cell = PSGroupCell;
 			label = "Action Sheet Style";
 		},
 		{
 			cell = PSSegmentCell;
-			default = 9;
 			key = "setActionSheetStyle";
-			label = "Action Sheet Style";
+			default = 9;
 			defaults = com.tomaszpoliszuk.alertcontroller;
 			PostNotification = "com.tomaszpoliszuk.alertcontroller.settingschanged";
 			validValues = (
@@ -108,6 +100,22 @@
 				"Action Sheet (Default)",
 				"Alert"
 			);
+		},
+		{
+			cell = PSGroupCell;
+			label = "Testing Area";
+		},
+		{
+			cell = PSButtonCell;
+			label = "Test Alert";
+			action = showExampleAlert;
+			icon = "/Library/PreferenceBundles/AlertControllerSettings.bundle/icons/AlertController.png";
+		},
+		{
+			cell = PSButtonCell;
+			label = "Test Text Alert";
+			action = showExampleTextAlert;
+			icon = "/Library/PreferenceBundles/AlertControllerSettings.bundle/icons/AlertController.png";
 		},
 		{
 			cell = PSButtonCell;
