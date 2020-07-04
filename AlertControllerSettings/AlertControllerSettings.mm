@@ -45,7 +45,7 @@
 	[self presentViewController:alert animated:YES completion:nil];
 }
 - (void) showExampleActionSheet {
-	UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:@"Title of Example Action Sheet" message:@"This is message of example Action Sheet feel free to ignore what is written here, more words to make it a litle bit longer." preferredStyle:UIAlertControllerStyleActionSheet];
+	UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:@"Title of Example Action Sheet" message:@"This is message of example Action Sheet feel free to ignore what is written here, more words to make it a litle bit longer. \n \n All glory Hypnotoad." preferredStyle:UIAlertControllerStyleActionSheet];
 	[actionSheet addAction:[UIAlertAction actionWithTitle:@"(•_•)" style:UIAlertActionStyleDefault handler:nil]];
 	[actionSheet addAction:[UIAlertAction actionWithTitle:@"( •_•)>⌐■-■" style:UIAlertActionStyleDefault handler:nil]];
 	[actionSheet addAction:[UIAlertAction actionWithTitle:@"(⌐■_■)" style:UIAlertActionStyleDefault handler:nil]];
