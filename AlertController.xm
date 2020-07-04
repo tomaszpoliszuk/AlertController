@@ -17,6 +17,8 @@ static long long setAlertStyleOutput;
 static long long setActionSheetStyle;
 static long long setActionSheetStyleOutput;
 
+static BOOL squareCornersInAlert;
+static BOOL squareCornersInActionSheet;
 
 @interface UIView (AlertController)
 -(void)setOverrideUserInterfaceStyle:(NSInteger)style;
@@ -28,6 +30,19 @@ static long long setActionSheetStyleOutput;
 
 @interface _UIAlertControllerInterfaceActionGroupView : UIInterfaceActionGroupView
 -(void)updateTraitOverride;
+@end
+
+@interface UIInterfaceActionConcreteVisualStyle : NSObject
+@end
+
+@interface UIInterfaceActionConcreteVisualStyle_iOS : UIInterfaceActionConcreteVisualStyle
+- (double)contentCornerRadius;
+@end
+
+@interface UIInterfaceActionConcreteVisualStyle_iOSAlert : UIInterfaceActionConcreteVisualStyle_iOS
+@end
+
+@interface UIInterfaceActionConcreteVisualStyle_iOSSheet : UIInterfaceActionConcreteVisualStyle_iOS
 @end
 
 void TweakSettingsChanged() {
@@ -44,6 +59,9 @@ void TweakSettingsChanged() {
 
 //	setAlertStyle = [[tweakSettings valueForKey:@"setAlertStyle"] integerValue];
 	setActionSheetStyle = [[tweakSettings valueForKey:@"setActionSheetStyle"] integerValue];
+
+	squareCornersInAlert = [[tweakSettings objectForKey:@"squareCornersInAlert"] boolValue];
+	squareCornersInActionSheet = [[tweakSettings objectForKey:@"squareCornersInActionSheet"] boolValue];
 }
 
 %hook UIAlertController
@@ -125,6 +143,28 @@ void TweakSettingsChanged() {
 		[self setOverrideUserInterfaceStyle:uiStyle];
 	}
 	%orig;
+}
+%end
+
+%hook UIInterfaceActionConcreteVisualStyle_iOSAlert
+- (double)contentCornerRadius {
+	double origValue = %orig;
+	if ( enableTweak && squareCornersInAlert ) {
+		return 0;
+	} else {
+		return origValue;
+	}
+}
+%end
+
+%hook UIInterfaceActionConcreteVisualStyle_iOSSheet
+- (double)contentCornerRadius {
+	double origValue = %orig;
+	if ( enableTweak && squareCornersInActionSheet ) {
+		return 0;
+	} else {
+		return origValue;
+	}
 }
 %end
 

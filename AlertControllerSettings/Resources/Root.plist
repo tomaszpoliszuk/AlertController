@@ -110,6 +110,30 @@
 		},
 		{
 			cell = PSGroupCell;
+			label = "Alert Style";
+		},
+		{
+			cell = PSSwitchCell;
+			default = 0;
+			key = "squareCornersInAlert";
+			label = "Square Corners";
+			defaults = com.tomaszpoliszuk.alertcontroller;
+			PostNotification = "com.tomaszpoliszuk.alertcontroller.settingschanged";
+		},
+		{
+			cell = PSGroupCell;
+			label = "Action Sheet Style";
+		},
+		{
+			cell = PSSwitchCell;
+			default = 0;
+			key = "squareCornersInActionSheet";
+			label = "Square Corners";
+			defaults = com.tomaszpoliszuk.alertcontroller;
+			PostNotification = "com.tomaszpoliszuk.alertcontroller.settingschanged";
+		},
+		{
+			cell = PSGroupCell;
 			label = "Testing Area";
 		},
 		{

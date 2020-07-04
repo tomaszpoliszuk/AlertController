@@ -13,11 +13,11 @@
 -(BOOL)containsSpecifier:(id)arg1;
 @end
 
-@interface AlertControllerMainSettings : PSListController
+@interface AlertControllerSettings : PSListController
 @property (nonatomic, retain) NSMutableDictionary *savedSpecifiers;
 @end
 
-@implementation AlertControllerMainSettings
+@implementation AlertControllerSettings
 - (NSArray *)specifiers {
 	if (!_specifiers) {
 		_specifiers = [self loadSpecifiersFromPlistName:@"Root" target:self];
