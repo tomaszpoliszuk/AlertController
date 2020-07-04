@@ -101,6 +101,15 @@ void TweakSettingsChanged() {
 		return origValue;
 	}
 }
+-(void)viewWillAppear:(BOOL)arg1 {
+	BOOL origValue = arg1;
+//	Force title and label color in dark mode alert so older, light-only applications displays text correctly
+	if ( uiStyle == 2 ) {
+		MSHookIvar<UILabel *>(self.view, "_titleLabel").textColor = UIColor.whiteColor;
+		MSHookIvar<UILabel *>(self.view, "_messageLabel").textColor = UIColor.whiteColor;
+	}
+	%orig(origValue);
+}
 %end
 
 
