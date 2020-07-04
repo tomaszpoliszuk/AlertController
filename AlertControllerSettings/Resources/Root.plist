@@ -2,16 +2,34 @@
 	title = "Alert Controller";
 	items = (
 		{
-			cell = PSGroupCell;
-			label = "Enable Tweak";
-		},
-		{
 			cell = PSSwitchCell;
 			default = false;
 			key = "enableTweak";
 			label = "Enable Tweak";
 			defaults = com.tomaszpoliszuk.alertcontroller;
 			PostNotification = "com.tomaszpoliszuk.alertcontroller.settingschanged";
+		},
+		{
+			cell = PSGroupCell;
+			label = "UI Style";
+		},
+		{
+			cell = PSSegmentCell;
+			default = 0;
+			key = "uiStyle";
+			label = "UI Style";
+			defaults = com.tomaszpoliszuk.alertcontroller;
+			PostNotification = "com.tomaszpoliszuk.alertcontroller.settingschanged";
+			validValues = (
+				0,
+				1,
+				2
+			);
+			validTitles = (
+				"Default",
+				"Light",
+				"Dark"
+			);
 		},
 		{
 			cell = PSGroupCell;
@@ -44,28 +62,6 @@
 			defaults = com.tomaszpoliszuk.alertcontroller;
 			PostNotification = "com.tomaszpoliszuk.alertcontroller.settingschanged";
 			icon = "/Library/PreferenceBundles/AlertControllerSettings.bundle/icons/cancel.png";
-		},
-		{
-			cell = PSGroupCell;
-			label = "UI Style";
-		},
-		{
-			cell = PSSegmentCell;
-			default = 0;
-			key = "uiStyle";
-			label = "UI Style";
-			defaults = com.tomaszpoliszuk.alertcontroller;
-			PostNotification = "com.tomaszpoliszuk.alertcontroller.settingschanged";
-			validValues = (
-				0,
-				1,
-				2
-			);
-			validTitles = (
-				"Default",
-				"Light",
-				"Dark"
-			);
 		},
 		{
 			cell = PSGroupCell;

@@ -3,6 +3,9 @@ NSString *domainString = @"com.tomaszpoliszuk.alertcontroller";
 NSMutableDictionary *tweakSettings;
 
 static BOOL enableTweak;
+
+static int uiStyle;
+
 static BOOL dismissByTappingOutside;
 static BOOL displayButtonsVertically;
 static BOOL hideCancelAction;
@@ -12,8 +15,6 @@ static long long setAlertStyleOutput;
 
 static long long setActionSheetStyle;
 static long long setActionSheetStyleOutput;
-
-static int uiStyle;
 
 
 @interface UIView (AlertController)
@@ -30,15 +31,17 @@ static int uiStyle;
 
 void TweakSettingsChanged() {
 	NSUserDefaults *tweakSettings = [[NSUserDefaults alloc] initWithSuiteName:domainString];
+
 	enableTweak = [[tweakSettings objectForKey:@"enableTweak"] boolValue];
+
+	uiStyle = [[tweakSettings valueForKey:@"uiStyle"] integerValue];
+
 	dismissByTappingOutside = [[tweakSettings objectForKey:@"dismissByTappingOutside"] boolValue];
 	displayButtonsVertically = [[tweakSettings objectForKey:@"displayButtonsVertically"] boolValue];
 	hideCancelAction = [[tweakSettings objectForKey:@"hideCancelAction"] boolValue];
 
 	setAlertStyle = [[tweakSettings valueForKey:@"setAlertStyle"] integerValue];
 	setActionSheetStyle = [[tweakSettings valueForKey:@"setActionSheetStyle"] integerValue];
-
-	uiStyle = [[tweakSettings valueForKey:@"uiStyle"] integerValue];
 }
 
 %hook UIAlertController
