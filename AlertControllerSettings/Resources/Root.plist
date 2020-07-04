@@ -76,12 +76,10 @@
 			PostNotification = "com.tomaszpoliszuk.alertcontroller.settingschanged";
 			validValues = (
 				9,
-				1,
 				0
 			);
 			validTitles = (
-				"Default",
-				"Alert",
+				"Alert (Default)",
 				"Action Sheet"
 			);
 		},
@@ -104,13 +102,11 @@
 			PostNotification = "com.tomaszpoliszuk.alertcontroller.settingschanged";
 			validValues = (
 				9,
-				1,
-				0
+				1
 			);
 			validTitles = (
-				"Default",
-				"Alert",
-				"Action Sheet"
+				"Action Sheet (Default)",
+				"Alert"
 			);
 		},
 		{
