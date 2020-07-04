@@ -10,7 +10,7 @@ static BOOL dismissByTappingOutside;
 static BOOL displayButtonsVertically;
 static BOOL hideCancelAction;
 
-static long long setAlertStyle;
+//	static long long setAlertStyle;
 static long long setAlertStyleOutput;
 
 static long long setActionSheetStyle;
@@ -40,7 +40,7 @@ void TweakSettingsChanged() {
 	displayButtonsVertically = [[tweakSettings objectForKey:@"displayButtonsVertically"] boolValue];
 	hideCancelAction = [[tweakSettings objectForKey:@"hideCancelAction"] boolValue];
 
-	setAlertStyle = [[tweakSettings valueForKey:@"setAlertStyle"] integerValue];
+//	setAlertStyle = [[tweakSettings valueForKey:@"setAlertStyle"] integerValue];
 	setActionSheetStyle = [[tweakSettings valueForKey:@"setActionSheetStyle"] integerValue];
 }
 
@@ -55,12 +55,12 @@ void TweakSettingsChanged() {
 }
 - (long long)preferredStyle {
 	long long origValue = %orig;
-	if ( setAlertStyle == 9 ) {
+//	if ( setAlertStyle == 9 ) {
 //	Alert = Default
 		setAlertStyleOutput = origValue;
-	} else {
-		setAlertStyleOutput = setAlertStyle;
-	}
+//	} else {
+//		setAlertStyleOutput = setAlertStyle;
+//	}
 	if ( setActionSheetStyle == 9 ) {
 //	Action Sheet = Default
 		setActionSheetStyleOutput = origValue;

@@ -33,7 +33,7 @@
 		},
 		{
 			cell = PSGroupCell;
-			label = "Alert Controller";
+			label = "Main settings";
 			footerText = "When 'Dismiss by tapping outside' is disabled 'Hide cancel action' will remain disabled to prevent user from removing ability to cancel action.";
 		},
 		{
@@ -64,10 +64,6 @@
 			icon = "/Library/PreferenceBundles/AlertControllerSettings.bundle/icons/cancel.png";
 		},
 		{
-			cell = PSGroupCell;
-			label = "Alert Style";
-		},
-		{
 			cell = PSSegmentCell;
 			key = "setAlertStyle";
 			default = 9;
@@ -81,10 +77,12 @@
 				"Alert (Default)",
 				"Action Sheet"
 			);
+			enabled = false;
+			height = 0;
 		},
 		{
 			cell = PSGroupCell;
-			label = "Action Sheet Style";
+			label = "Action Sheet should look like:";
 		},
 		{
 			cell = PSSegmentCell;
