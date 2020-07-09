@@ -1,4 +1,5 @@
-NSString *domainString = @"com.tomaszpoliszuk.alertcontroller";
+#define userSettingsFile @"/var/mobile/Library/Preferences/com.tomaszpoliszuk.alertcontroller.plist"
+#define packageName "com.tomaszpoliszuk.alertcontroller"
 
 NSMutableDictionary *tweakSettings;
 
@@ -47,25 +48,38 @@ static BOOL squareCornersInActionSheet;
 @interface UIInterfaceActionConcreteVisualStyle_iOSSheet : UIInterfaceActionConcreteVisualStyle_iOS
 @end
 
-void TweakSettingsChanged() {
-	NSUserDefaults *tweakSettings = [[NSUserDefaults alloc] initWithSuiteName:domainString];
+void SettingsChanged() {
+	CFArrayRef keyList = CFPreferencesCopyKeyList(CFSTR(packageName), kCFPreferencesCurrentUser, kCFPreferencesAnyHost);
+	if(keyList) {
+		tweakSettings = (NSMutableDictionary *)CFBridgingRelease(CFPreferencesCopyMultiple(keyList, CFSTR(packageName), kCFPreferencesCurrentUser, kCFPreferencesAnyHost));
+		CFRelease(keyList);
+	} else {
+		tweakSettings = nil;
+	}
+	if (!tweakSettings) {
+		tweakSettings = [NSMutableDictionary dictionaryWithContentsOfFile:userSettingsFile];
+	}
 
-	enableTweak = [[tweakSettings objectForKey:@"enableTweak"] boolValue];
+	enableTweak = [([tweakSettings objectForKey:@"enableTweak"] ?: @(YES)) boolValue];
 
-	uiStyle = [[tweakSettings valueForKey:@"uiStyle"] integerValue];
+	uiStyle = [([tweakSettings valueForKey:@"uiStyle"] ?: @(0)) integerValue];
 
-	dismissByTappingOutside = [[tweakSettings objectForKey:@"dismissByTappingOutside"] boolValue];
-	displayButtonsVertically = [[tweakSettings objectForKey:@"displayButtonsVertically"] boolValue];
-	showIcons = [[tweakSettings objectForKey:@"showIcons"] boolValue];
-	hideCancelAction = [[tweakSettings objectForKey:@"hideCancelAction"] boolValue];
+	dismissByTappingOutside = [([tweakSettings objectForKey:@"dismissByTappingOutside"] ?: @(YES)) boolValue];
+	displayButtonsVertically = [([tweakSettings objectForKey:@"displayButtonsVertically"] ?: @(NO)) boolValue];
+	showIcons = [([tweakSettings objectForKey:@"showIcons"] ?: @(YES)) boolValue];
+	hideCancelAction = [([tweakSettings objectForKey:@"hideCancelAction"] ?: @(NO)) boolValue];
 
-//	setAlertStyle = [[tweakSettings valueForKey:@"setAlertStyle"] integerValue];
+//	setAlertStyle = [([tweakSettings valueForKey:@"setAlertStyle"] ?: @(9)) integerValue];
 	setActionSheetStyle = [[tweakSettings valueForKey:@"setActionSheetStyle"] integerValue];
 
-	squareCornersInAlert = [[tweakSettings objectForKey:@"squareCornersInAlert"] boolValue];
-	removeSeparatorsInAlert = [[tweakSettings objectForKey:@"removeSeparatorsInAlert"] boolValue];
+	squareCornersInAlert = [([tweakSettings objectForKey:@"squareCornersInAlert"] ?: @(NO)) boolValue];
+	removeSeparatorsInAlert = [([tweakSettings objectForKey:@"removeSeparatorsInAlert"] ?: @(NO)) boolValue];
 
-	squareCornersInActionSheet = [[tweakSettings objectForKey:@"squareCornersInActionSheet"] boolValue];
+	squareCornersInActionSheet = [([tweakSettings objectForKey:@"squareCornersInActionSheet"] ?: @(NO)) boolValue];
+}
+
+static void receivedNotification(CFNotificationCenterRef center, void *observer, CFStringRef name, const void *object, CFDictionaryRef userInfo) {
+	SettingsChanged();
 }
 
 %hook UIAlertController
@@ -192,8 +206,8 @@ void TweakSettingsChanged() {
 %ctor {
 // Found in https://github.com/EthanRDoesMC/Dawn/commit/847cb5192dae9138a893e394da825e86be561a6b
 	if ([[[[NSProcessInfo processInfo] arguments] objectAtIndex:0] containsString:@"/Application"] || [[[[NSProcessInfo processInfo] arguments] objectAtIndex:0] containsString:@"SpringBoard.app"]) {
-		TweakSettingsChanged();
-		CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(), NULL, (CFNotificationCallback)TweakSettingsChanged, CFSTR("com.tomaszpoliszuk.alertcontroller.settingschanged"), NULL, CFNotificationSuspensionBehaviorDeliverImmediately);
+		SettingsChanged();
+		CFNotificationCenterAddObserver( CFNotificationCenterGetDarwinNotifyCenter(), NULL, receivedNotification, CFSTR("com.tomaszpoliszuk.alertcontroller.settingschanged"), NULL, CFNotificationSuspensionBehaviorDeliverImmediately);
 		%init; // == %init(_ungrouped);
 	}
 }

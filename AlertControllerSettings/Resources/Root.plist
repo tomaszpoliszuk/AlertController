@@ -5,7 +5,7 @@
 			cell = PSSwitchCell;
 			key = "enableTweak";
 			label = "Enable Tweak";
-			default = 0;
+			default = 1;
 			defaults = com.tomaszpoliszuk.alertcontroller;
 			PostNotification = "com.tomaszpoliszuk.alertcontroller.settingschanged";
 			height = 55;
@@ -42,7 +42,7 @@
 			cell = PSSwitchCell;
 			key = "dismissByTappingOutside";
 			label = "Dismiss by tapping outside";
-			default = 0;
+			default = 1;
 			defaults = com.tomaszpoliszuk.alertcontroller;
 			PostNotification = "com.tomaszpoliszuk.alertcontroller.settingschanged";
 			icon = "/Library/PreferenceBundles/AlertControllerSettings.bundle/icons/outside.png";
@@ -58,7 +58,7 @@
 		},
 		{
 			cell = PSSwitchCell;
-			default = 0;
+			default = 1;
 			key = "showIcons";
 			label = "Show Icons";
 			defaults = com.tomaszpoliszuk.alertcontroller;
