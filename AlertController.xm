@@ -48,6 +48,12 @@ static BOOL squareCornersInActionSheet;
 @interface UIInterfaceActionConcreteVisualStyle_iOSSheet : UIInterfaceActionConcreteVisualStyle_iOS
 @end
 
+@interface UIAlertControllerVisualStyle : NSObject
+@end
+
+@interface UIAlertControllerVisualStyleAlert : UIAlertControllerVisualStyle
+@end
+
 void SettingsChanged() {
 	CFArrayRef keyList = CFPreferencesCopyKeyList(CFSTR(packageName), kCFPreferencesCurrentUser, kCFPreferencesAnyHost);
 	if(keyList) {
@@ -115,17 +121,7 @@ static void receivedNotification(CFNotificationCenterRef center, void *observer,
 		return origValue;
 	}
 }
--(void)viewWillAppear:(BOOL)arg1 {
-	BOOL origValue = arg1;
-//	Force title and label color in dark mode alert so older, light-only applications displays text correctly
-	if ( enableTweak && uiStyle == 2 ) {
-		MSHookIvar<UILabel *>(self.view, "_titleLabel").textColor = UIColor.whiteColor;
-		MSHookIvar<UILabel *>(self.view, "_messageLabel").textColor = UIColor.whiteColor;
-	}
-	%orig(origValue);
-}
 %end
-
 
 %hook _UIAlertControllerView
 -(void)_configureActionGroupViewToAllowHorizontalLayout:(bool)arg1 {
@@ -199,6 +195,25 @@ static void receivedNotification(CFNotificationCenterRef center, void *observer,
 		return 0;
 	} else {
 		return origValue;
+	}
+}
+%end
+
+%hook UIAlertControllerVisualStyleAlert
+- (id)titleLabelColor {
+//	Force title color in dark mode alert so older, light-only applications displays text correctly
+	if ( enableTweak && uiStyle == 2 ) {
+		return UIColor.whiteColor;
+	} else {
+		return %orig;
+	}
+}
+- (id)messageLabelColor {
+//	Force message color in dark mode alert so older, light-only applications displays text correctly
+	if ( enableTweak && uiStyle == 2 ) {
+		return UIColor.whiteColor;
+	} else {
+		return %orig;
 	}
 }
 %end
