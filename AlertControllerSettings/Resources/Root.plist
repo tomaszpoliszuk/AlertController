@@ -8,16 +8,88 @@
 			default = 1;
 			defaults = com.tomaszpoliszuk.alertcontroller;
 			PostNotification = "com.tomaszpoliszuk.alertcontroller.settingschanged";
+			icon = "icons/AlertController.png";
 			height = 55;
 		},
 		{
 			cell = PSGroupCell;
-			label = "UI Style";
+			label = "Main settings";
+			footerText = "When 'Dismiss by tapping outside' is disabled 'Hide cancel action' will remain disabled to prevent user from removing ability to cancel action.";
+		},
+		{
+			cell = PSSwitchCell;
+			key = "dismissByTappingOutside";
+			label = "Dismiss by tapping outside";
+			default = 1;
+			defaults = com.tomaszpoliszuk.alertcontroller;
+			PostNotification = "com.tomaszpoliszuk.alertcontroller.settingschanged";
+			icon = "icons/outside.png";
+		},
+		{
+			cell = PSSwitchCell;
+			default = 1;
+			key = "showIcons";
+			label = "Show Icons";
+			defaults = com.tomaszpoliszuk.alertcontroller;
+			PostNotification = "com.tomaszpoliszuk.alertcontroller.settingschanged";
+			icon = "icons/icons.png";
+		},
+		{
+			cell = PSSwitchCell;
+			key = "hideCancelAction";
+			label = "Hide cancel action";
+			default = 0;
+			defaults = com.tomaszpoliszuk.alertcontroller;
+			PostNotification = "com.tomaszpoliszuk.alertcontroller.settingschanged";
+			icon = "icons/cancel.png";
+		},
+		{
+			cell = PSGroupCell;
+			label = "Alert should look like:";
 		},
 		{
 			cell = PSSegmentCell;
-			key = "uiStyle";
-			label = "UI Style";
+			key = "setAlertStyle";
+			default = 1;
+			defaults = com.tomaszpoliszuk.alertcontroller;
+			PostNotification = "com.tomaszpoliszuk.alertcontroller.settingschanged";
+			validValues = (
+				1,
+				0
+			);
+			validTitles = (
+				"Alert (Default)",
+				"Action Sheet"
+			);
+			height = 55;
+		},
+		{
+			cell = PSGroupCell;
+			label = "Action Sheet should look like:";
+		},
+		{
+			cell = PSSegmentCell;
+			key = "setActionSheetStyle";
+			default = 0;
+			defaults = com.tomaszpoliszuk.alertcontroller;
+			PostNotification = "com.tomaszpoliszuk.alertcontroller.settingschanged";
+			validValues = (
+				0,
+				1
+			);
+			validTitles = (
+				"Action Sheet (Default)",
+				"Alert"
+			);
+			height = 55;
+		},
+		{
+			cell = PSGroupCell;
+			label = "Alert Style";
+		},
+		{
+			cell = PSSegmentCell;
+			key = "uiStyleInAlert";
 			default = 0;
 			defaults = com.tomaszpoliszuk.alertcontroller;
 			PostNotification = "com.tomaszpoliszuk.alertcontroller.settingschanged";
@@ -34,86 +106,26 @@
 			height = 55;
 		},
 		{
-			cell = PSGroupCell;
-			label = "Main settings";
-			footerText = "When 'Dismiss by tapping outside' is disabled 'Hide cancel action' will remain disabled to prevent user from removing ability to cancel action.";
-		},
-		{
-			cell = PSSwitchCell;
-			key = "dismissByTappingOutside";
-			label = "Dismiss by tapping outside";
-			default = 1;
+			cell = PSEditTextCell;
+			key = titleLabelFontAlert;
+			label = "Title Font Size";
 			defaults = com.tomaszpoliszuk.alertcontroller;
 			PostNotification = "com.tomaszpoliszuk.alertcontroller.settingschanged";
-			icon = "/Library/PreferenceBundles/AlertControllerSettings.bundle/icons/outside.png";
+			noAutoCorrect = 0;
+			keyboard = numbers;
+			isNumeric = 1;
+			placeholder = 17;
 		},
 		{
-			cell = PSSwitchCell;
-			key = "displayButtonsVertically";
-			label = "Display buttons vertically";
-			default = 0;
+			cell = PSEditTextCell;
+			key = messageLabelFontAlert;
+			label = "Message Font Size";
 			defaults = com.tomaszpoliszuk.alertcontroller;
 			PostNotification = "com.tomaszpoliszuk.alertcontroller.settingschanged";
-			icon = "/Library/PreferenceBundles/AlertControllerSettings.bundle/icons/vertical.png";
-		},
-		{
-			cell = PSSwitchCell;
-			default = 1;
-			key = "showIcons";
-			label = "Show Icons";
-			defaults = com.tomaszpoliszuk.alertcontroller;
-			PostNotification = "com.tomaszpoliszuk.alertcontroller.settingschanged";
-			icon = "/Library/PreferenceBundles/AlertControllerSettings.bundle/icons/icons.png";
-		},
-		{
-			cell = PSSwitchCell;
-			key = "hideCancelAction";
-			label = "Hide cancel action";
-			default = 0;
-			defaults = com.tomaszpoliszuk.alertcontroller;
-			PostNotification = "com.tomaszpoliszuk.alertcontroller.settingschanged";
-			icon = "/Library/PreferenceBundles/AlertControllerSettings.bundle/icons/cancel.png";
-		},
-		{
-			cell = PSSegmentCell;
-			key = "setAlertStyle";
-			default = 9;
-			defaults = com.tomaszpoliszuk.alertcontroller;
-			PostNotification = "com.tomaszpoliszuk.alertcontroller.settingschanged";
-			validValues = (
-				9,
-				0
-			);
-			validTitles = (
-				"Alert (Default)",
-				"Action Sheet"
-			);
-			enabled = false;
-			height = 0;
-		},
-		{
-			cell = PSGroupCell;
-			label = "Action Sheet should look like:";
-		},
-		{
-			cell = PSSegmentCell;
-			key = "setActionSheetStyle";
-			default = 9;
-			defaults = com.tomaszpoliszuk.alertcontroller;
-			PostNotification = "com.tomaszpoliszuk.alertcontroller.settingschanged";
-			validValues = (
-				9,
-				1
-			);
-			validTitles = (
-				"Action Sheet (Default)",
-				"Alert"
-			);
-			height = 55;
-		},
-		{
-			cell = PSGroupCell;
-			label = "Alert Style";
+			noAutoCorrect = 0;
+			keyboard = numbers;
+			isNumeric = 1;
+			placeholder = 13;
 		},
 		{
 			cell = PSSwitchCell;
@@ -122,20 +134,74 @@
 			label = "Square Corners";
 			defaults = com.tomaszpoliszuk.alertcontroller;
 			PostNotification = "com.tomaszpoliszuk.alertcontroller.settingschanged";
-			icon = "/Library/PreferenceBundles/AlertControllerSettings.bundle/icons/AlertSquare.png";
+		},
+		{
+			cell = PSSwitchCell;
+			default = 1;
+			key = "showSeparatorsInAlert";
+			label = "Show Separators";
+			defaults = com.tomaszpoliszuk.alertcontroller;
+			PostNotification = "com.tomaszpoliszuk.alertcontroller.settingschanged";
 		},
 		{
 			cell = PSSwitchCell;
 			default = 0;
-			key = "removeSeparatorsInAlert";
-			label = "Remove Separators";
+			key = "buttonsSizeAlert";
+			label = "Large Buttons";
 			defaults = com.tomaszpoliszuk.alertcontroller;
 			PostNotification = "com.tomaszpoliszuk.alertcontroller.settingschanged";
-			icon = "/Library/PreferenceBundles/AlertControllerSettings.bundle/icons/AlertSeparateless.png";
+		},
+		{
+			cell = PSSwitchCell;
+			key = "displayButtonsVerticallyAlert";
+			label = "Force buttons vertically";
+			default = 0;
+			defaults = com.tomaszpoliszuk.alertcontroller;
+			PostNotification = "com.tomaszpoliszuk.alertcontroller.settingschanged";
 		},
 		{
 			cell = PSGroupCell;
 			label = "Action Sheet Style";
+		},
+		{
+			cell = PSSegmentCell;
+			key = "uiStyleInActionSheet";
+			default = 0;
+			defaults = com.tomaszpoliszuk.alertcontroller;
+			PostNotification = "com.tomaszpoliszuk.alertcontroller.settingschanged";
+			validValues = (
+				0,
+				1,
+				2
+			);
+			validTitles = (
+				"Default",
+				"Light",
+				"Dark"
+			);
+			height = 55;
+		},
+		{
+			cell = PSEditTextCell;
+			key = titleLabelFontActionSheet;
+			label = "Title Font Size";
+			defaults = com.tomaszpoliszuk.alertcontroller;
+			PostNotification = "com.tomaszpoliszuk.alertcontroller.settingschanged";
+			noAutoCorrect = 0;
+			keyboard = numbers;
+			isNumeric = 1;
+			placeholder = 13;
+		},
+		{
+			cell = PSEditTextCell;
+			key = messageLabelFontActionSheet;
+			label = "Message Font Size";
+			defaults = com.tomaszpoliszuk.alertcontroller;
+			PostNotification = "com.tomaszpoliszuk.alertcontroller.settingschanged";
+			noAutoCorrect = 0;
+			keyboard = numbers;
+			isNumeric = 1;
+			placeholder = 13;
 		},
 		{
 			cell = PSSwitchCell;
@@ -144,7 +210,30 @@
 			label = "Square Corners";
 			defaults = com.tomaszpoliszuk.alertcontroller;
 			PostNotification = "com.tomaszpoliszuk.alertcontroller.settingschanged";
-			icon = "/Library/PreferenceBundles/AlertControllerSettings.bundle/icons/ActionSheetSquare.png";
+		},
+		{
+			cell = PSSwitchCell;
+			default = 1;
+			key = "showSeparatorsInActionSheet";
+			label = "Show Separators";
+			defaults = com.tomaszpoliszuk.alertcontroller;
+			PostNotification = "com.tomaszpoliszuk.alertcontroller.settingschanged";
+		},
+		{
+			cell = PSSwitchCell;
+			default = 1;
+			key = "buttonsSizeActionSheet";
+			label = "Large Buttons";
+			defaults = com.tomaszpoliszuk.alertcontroller;
+			PostNotification = "com.tomaszpoliszuk.alertcontroller.settingschanged";
+		},
+		{
+			cell = PSSwitchCell;
+			default = 0;
+			key = "mergeCancelButtonInActionSheet";
+			label = "Merge Cancel Button";
+			defaults = com.tomaszpoliszuk.alertcontroller;
+			PostNotification = "com.tomaszpoliszuk.alertcontroller.settingschanged";
 		},
 		{
 			cell = PSGroupCell;
@@ -154,19 +243,29 @@
 			cell = PSButtonCell;
 			label = "Test Alert";
 			action = showExampleAlert;
-			icon = "/Library/PreferenceBundles/AlertControllerSettings.bundle/icons/AlertController.png";
+			icon = "icons/AlertController.png";
 		},
 		{
 			cell = PSButtonCell;
 			label = "Test Text Alert";
 			action = showExampleTextAlert;
-			icon = "/Library/PreferenceBundles/AlertControllerSettings.bundle/icons/AlertText.png";
+			icon = "icons/AlertText.png";
 		},
 		{
 			cell = PSButtonCell;
 			label = "Test Action Sheet";
 			action = showExampleActionSheet;
-			icon = "/Library/PreferenceBundles/AlertControllerSettings.bundle/icons/ActionSheet.png";
+			icon = "icons/ActionSheet.png";
+		},
+		{
+			cell = PSGroupCell;
+			label = " ";
+		},
+		{
+			cell = PSButtonCell;
+			label = "Reset Settings";
+			action = resetSettings;
+			alignment = center;
 		},
 		{
 			cell = PSGroupCell;
@@ -176,25 +275,25 @@
 			cell = PSButtonCell;
 			label = "Source Code";
 			action = sourceCode;
-			icon = "/Library/PreferenceBundles/AlertControllerSettings.bundle/icons/code.png";
+			icon = "icons/code.png";
 		},
 		{
 			cell = PSButtonCell;
-			label = "Report Issue @ GitHub";
-			action = reportIssueAtGithub;
-			icon = "/Library/PreferenceBundles/AlertControllerSettings.bundle/icons/bug.png";
+			label = "Known Issues";
+			action = knownIssues;
+			icon = "icons/bug.png";
 		},
 		{
 			cell = PSButtonCell;
 			label = "Tomasz Poliszuk @ Github";
 			action = TomaszPoliszukAtGithub;
-			icon = "/Library/PreferenceBundles/AlertControllerSettings.bundle/icons/github.png";
+			icon = "icons/github.png";
 		},
 		{
 			cell = PSButtonCell;
 			label = "Tomasz Poliszuk @ Twitter";
 			action = TomaszPoliszukAtTwitter;
-			icon = "/Library/PreferenceBundles/AlertControllerSettings.bundle/icons/twitter.png";
+			icon = "icons/twitter.png";
 		}
 	);
 }

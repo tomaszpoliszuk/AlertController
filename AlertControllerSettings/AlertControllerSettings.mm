@@ -1,30 +1,34 @@
-//#import <Preferences/PSViewController.h>
 #import <Preferences/PSListController.h>
 #import <Preferences/PSSpecifier.h>
 
-@interface PSControlTableCell : PSTableCell
-- (UIControl *)control;
-@end
+#define isiOS13Up (kCFCoreFoundationVersionNumber >= 1665.15)
 
-@interface PSSwitchTableCell : PSControlTableCell
-@end
+NSString *domainString = @"com.tomaszpoliszuk.alertcontroller";
 
 @interface PSListController (AlertController)
--(BOOL)containsSpecifier:(id)arg1;
 @end
-
-@interface AlertControllerSettings : PSListController
-@property (nonatomic, retain) NSMutableDictionary *savedSpecifiers;
+@interface AlertControllerSettings : PSListController {
+	NSMutableArray *removeSpecifiers;
+}
 @end
 
 @implementation AlertControllerSettings
 - (NSArray *)specifiers {
 	if (!_specifiers) {
 		_specifiers = [self loadSpecifiersFromPlistName:@"Root" target:self];
+		if (!isiOS13Up) {
+			removeSpecifiers = [[NSMutableArray alloc]init];
+			for(PSSpecifier* specifier in _specifiers) {
+				NSString* key = [specifier propertyForKey:@"key"];
+				if([key isEqualToString:@"uiStyleInAlert"] || [key isEqualToString:@"showSeparatorsInAlert"] || [key isEqualToString:@"uiStyleInActionSheet"] || [key isEqualToString:@"showSeparatorsInActionSheet"]) {
+					[removeSpecifiers addObject:specifier];
+				}
+			}
+			[_specifiers removeObjectsInArray:removeSpecifiers];
+		}
 	}
 	return _specifiers;
 }
-
 - (void)showExampleAlert {
 	UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Title of Example Alert" message:@"This is message of example Alert feel free to ignore what is written here, more words to make it a litle bit longer. \n \n All glory Hypnotoad." preferredStyle:UIAlertControllerStyleAlert];
 	[alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
@@ -52,29 +56,39 @@
 	[actionSheet addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil]];
 	[self presentViewController:actionSheet animated:YES completion:nil];
 }
-
+- (void)resetSettings {
+	NSUserDefaults *tweakSettings = [[NSUserDefaults alloc] initWithSuiteName:domainString];
+	UIAlertController *resetSettingsAlert = [UIAlertController alertControllerWithTitle:@"Reset Alert Controller Settings" message:@"Do you want to reset settings?" preferredStyle:UIAlertControllerStyleAlert];
+	UIAlertAction *confirm = [UIAlertAction actionWithTitle:@"Confirm" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+		for(NSString* key in [[tweakSettings dictionaryRepresentation] allKeys]) {
+			[tweakSettings removeObjectForKey:key];
+		}
+		[tweakSettings synchronize];
+		[self reloadSpecifiers];
+	}];
+	UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
+	[resetSettingsAlert addAction:cancel];
+	[resetSettingsAlert addAction:confirm];
+	[self presentViewController:resetSettingsAlert animated:YES completion:nil];
+}
 -(void)sourceCode {
 	NSURL *sourceCode = [NSURL URLWithString:@"https://github.com/tomaszpoliszuk/AlertController"];
 	[[UIApplication sharedApplication] openURL:sourceCode options:@{} completionHandler:nil];
 }
-
--(void)reportIssueAtGithub {
-	NSURL *reportIssueAtGithub = [NSURL URLWithString:@"https://github.com/tomaszpoliszuk/AlertController/issues/new"];
-	[[UIApplication sharedApplication] openURL:reportIssueAtGithub options:@{} completionHandler:nil];
+-(void)knownIssues {
+	NSURL *knownIssues = [NSURL URLWithString:@"https://github.com/tomaszpoliszuk/AlertController/issues"];
+	[[UIApplication sharedApplication] openURL:knownIssues options:@{} completionHandler:nil];
 }
-
 -(void)TomaszPoliszukAtGithub {
 	UIApplication *application = [UIApplication sharedApplication];
 	NSString *username = @"tomaszpoliszuk";
 	NSURL *githubWebsite = [NSURL URLWithString:[@"https://github.com/" stringByAppendingString:username]];
 	[application openURL:githubWebsite options:@{} completionHandler:nil];
 }
-
 -(void)TomaszPoliszukAtTwitter {
 	UIApplication *application = [UIApplication sharedApplication];
 	NSString *username = @"tomaszpoliszuk";
 	NSURL *twitterWebsite = [NSURL URLWithString:[@"https://mobile.twitter.com/" stringByAppendingString:username]];
 	[application openURL:twitterWebsite options:@{} completionHandler:nil];
 }
-
 @end

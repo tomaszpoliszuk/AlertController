@@ -1,63 +1,69 @@
 #define userSettingsFile @"/var/mobile/Library/Preferences/com.tomaszpoliszuk.alertcontroller.plist"
 #define packageName "com.tomaszpoliszuk.alertcontroller"
+#define isiOS13Up (kCFCoreFoundationVersionNumber >= 1665.15)
 
 NSMutableDictionary *tweakSettings;
 
-static BOOL enableTweak;
+static bool enableTweak;
 
-static int uiStyle;
+static bool dismissByTappingOutside;
+static bool showIcons;
+static bool hideCancelAction;
 
-static BOOL dismissByTappingOutside;
-static BOOL displayButtonsVertically;
-static BOOL showIcons;
-static BOOL hideCancelAction;
-
-//	static long long setAlertStyle;
-static long long setAlertStyleOutput;
-
+static long long setAlertStyle;
 static long long setActionSheetStyle;
-static long long setActionSheetStyleOutput;
 
-static BOOL squareCornersInAlert;
-static BOOL removeSeparatorsInAlert;
+static int uiStyleInAlert;
+static double titleLabelFontAlert;
+static double messageLabelFontAlert;
+static bool squareCornersInAlert;
+static bool showSeparatorsInAlert;
+static long long buttonsSizeAlert;
+static bool displayButtonsVerticallyAlert;
 
-static BOOL squareCornersInActionSheet;
+static int uiStyleInActionSheet;
+static double titleLabelFontActionSheet;
+static double messageLabelFontActionSheet;
+static bool squareCornersInActionSheet;
+static bool showSeparatorsInActionSheet;
+static long long buttonsSizeActionSheet;
+static bool mergeCancelButtonInActionSheet;
+
+
+@interface UIAlertController (AlertController)
+@property (readonly) long long _resolvedStyle;
+@end
 
 @interface UIView (AlertController)
 -(void)setOverrideUserInterfaceStyle:(NSInteger)style;
+-(id)_viewControllerForAncestor;
 @end
 
 @interface UIInterfaceActionGroupView : UIView
--(void)updateTraitOverride;
 @end
 
 @interface _UIAlertControllerInterfaceActionGroupView : UIInterfaceActionGroupView
--(void)updateTraitOverride;
 @end
 
-@interface UIInterfaceActionConcreteVisualStyle : NSObject
-@end
-
-@interface UIInterfaceActionConcreteVisualStyle_iOS : UIInterfaceActionConcreteVisualStyle
-- (double)contentCornerRadius;
-@end
-
-@interface UIInterfaceActionConcreteVisualStyle_iOSAlert : UIInterfaceActionConcreteVisualStyle_iOS
-@end
-
-@interface UIInterfaceActionConcreteVisualStyle_iOSSheet : UIInterfaceActionConcreteVisualStyle_iOS
-@end
-
-@interface UIAlertControllerVisualStyle : NSObject
-@end
-
-@interface UIAlertControllerVisualStyleAlert : UIAlertControllerVisualStyle
+@interface _UIInterfaceActionVibrantSeparatorView : UIView
 @end
 
 void SettingsChanged() {
-	CFArrayRef keyList = CFPreferencesCopyKeyList(CFSTR(packageName), kCFPreferencesCurrentUser, kCFPreferencesAnyHost);
+	CFArrayRef keyList = CFPreferencesCopyKeyList(
+		CFSTR(packageName),
+		kCFPreferencesCurrentUser,
+		kCFPreferencesAnyHost
+	);
 	if(keyList) {
-		tweakSettings = (NSMutableDictionary *)CFBridgingRelease(CFPreferencesCopyMultiple(keyList, CFSTR(packageName), kCFPreferencesCurrentUser, kCFPreferencesAnyHost));
+		tweakSettings = (
+			NSMutableDictionary *)CFBridgingRelease(
+			CFPreferencesCopyMultiple(
+				keyList,
+				CFSTR(packageName),
+				kCFPreferencesCurrentUser,
+				kCFPreferencesAnyHost
+			)
+		);
 		CFRelease(keyList);
 	} else {
 		tweakSettings = nil;
@@ -68,20 +74,29 @@ void SettingsChanged() {
 
 	enableTweak = [([tweakSettings objectForKey:@"enableTweak"] ?: @(YES)) boolValue];
 
-	uiStyle = [([tweakSettings valueForKey:@"uiStyle"] ?: @(0)) integerValue];
-
 	dismissByTappingOutside = [([tweakSettings objectForKey:@"dismissByTappingOutside"] ?: @(YES)) boolValue];
-	displayButtonsVertically = [([tweakSettings objectForKey:@"displayButtonsVertically"] ?: @(NO)) boolValue];
 	showIcons = [([tweakSettings objectForKey:@"showIcons"] ?: @(YES)) boolValue];
 	hideCancelAction = [([tweakSettings objectForKey:@"hideCancelAction"] ?: @(NO)) boolValue];
 
-//	setAlertStyle = [([tweakSettings valueForKey:@"setAlertStyle"] ?: @(9)) integerValue];
-	setActionSheetStyle = [[tweakSettings valueForKey:@"setActionSheetStyle"] integerValue];
+	setAlertStyle = [([tweakSettings valueForKey:@"setAlertStyle"] ?: @(1)) integerValue];
+	setActionSheetStyle = [([tweakSettings valueForKey:@"setActionSheetStyle"] ?: @(0)) integerValue];
 
+	uiStyleInAlert = [([tweakSettings valueForKey:@"uiStyleInAlert"] ?: @(0)) integerValue];
+	titleLabelFontAlert = [[tweakSettings valueForKey:@"titleLabelFontAlert"] integerValue];
+	messageLabelFontAlert = [[tweakSettings valueForKey:@"messageLabelFontAlert"] integerValue];
 	squareCornersInAlert = [([tweakSettings objectForKey:@"squareCornersInAlert"] ?: @(NO)) boolValue];
-	removeSeparatorsInAlert = [([tweakSettings objectForKey:@"removeSeparatorsInAlert"] ?: @(NO)) boolValue];
+	showSeparatorsInAlert = [([tweakSettings objectForKey:@"showSeparatorsInAlert"] ?: @(YES)) boolValue];
+	buttonsSizeAlert = [([tweakSettings valueForKey:@"buttonsSizeAlert"] ?: @(0)) integerValue];
+	displayButtonsVerticallyAlert = [([tweakSettings objectForKey:@"displayButtonsVerticallyAlert"] ?: @(NO)) boolValue];
 
+	uiStyleInActionSheet = [([tweakSettings valueForKey:@"uiStyleInActionSheet"] ?: @(0)) integerValue];
+	titleLabelFontActionSheet = [[tweakSettings valueForKey:@"titleLabelFontActionSheet"] integerValue];
+	messageLabelFontActionSheet = [[tweakSettings valueForKey:@"messageLabelFontActionSheet"] integerValue];
 	squareCornersInActionSheet = [([tweakSettings objectForKey:@"squareCornersInActionSheet"] ?: @(NO)) boolValue];
+	showSeparatorsInActionSheet = [([tweakSettings objectForKey:@"showSeparatorsInActionSheet"] ?: @(YES)) boolValue];
+	buttonsSizeActionSheet = [([tweakSettings valueForKey:@"buttonsSizeActionSheet"] ?: @(1)) integerValue];
+	mergeCancelButtonInActionSheet = [([tweakSettings objectForKey:@"mergeCancelButtonInActionSheet"] ?: @(NO)) boolValue];
+
 }
 
 static void receivedNotification(CFNotificationCenterRef center, void *observer, CFStringRef name, const void *object, CFDictionaryRef userInfo) {
@@ -93,79 +108,128 @@ static void receivedNotification(CFNotificationCenterRef center, void *observer,
 	bool origValue = %orig;
 	if ( enableTweak ) {
 		return dismissByTappingOutside;
-	} else {
-		return origValue;
 	}
+	return origValue;
 }
-- (long long)preferredStyle {
+- (long long)_resolvedStyle {
 	long long origValue = %orig;
-//	if ( setAlertStyle == 9 ) {
-//	Alert = Default
-		setAlertStyleOutput = origValue;
-//	} else {
-//		setAlertStyleOutput = setAlertStyle;
-//	}
-	if ( setActionSheetStyle == 9 ) {
-//	Action Sheet = Default
-		setActionSheetStyleOutput = origValue;
-	} else {
-		setActionSheetStyleOutput = setActionSheetStyle;
-	}
 	if ( enableTweak && origValue == 1 ) {
-//	Alert
-		return setAlertStyleOutput;
+		return setAlertStyle;
 	} else if ( enableTweak && origValue == 0 ) {
-//	Action Sheet
-		return setActionSheetStyleOutput;
-	} else {
-		return origValue;
+		return setActionSheetStyle;
 	}
+	return origValue;
 }
 %end
 
 %hook _UIAlertControllerView
 -(void)_configureActionGroupViewToAllowHorizontalLayout:(bool)arg1 {
-	if ( enableTweak && displayButtonsVertically ) {
-		%orig(!displayButtonsVertically);
+	if ( enableTweak && displayButtonsVerticallyAlert ) {
+		%orig(!displayButtonsVerticallyAlert);
 	} else {
 		%orig;
 	}
 }
 -(bool)showsCancelAction {
-	BOOL origValue = %orig;
+	bool origValue = %orig;
 	if ( enableTweak && !dismissByTappingOutside && !hideCancelAction ) {
 		return !hideCancelAction;
 	} else if ( enableTweak && dismissByTappingOutside && hideCancelAction ) {
 		return !hideCancelAction;
-	} else {
-		return origValue;
 	}
+	return origValue;
 }
-%end
-
-%hook UIAlertAction
-- (long long)image {
-	long long origValue = %orig;
-	if ( enableTweak && !showIcons ) {
-		return nil;
-	} else {
-		return origValue;
+- (void)setCancelActionIsDiscrete:(bool)arg1 {
+	if ( enableTweak && mergeCancelButtonInActionSheet ) {
+		arg1 = NO;
 	}
+	%orig;
+}
+- (bool)_titleAndMessageLabelUseVibrancy {
+	bool origValue = %orig;
+	if ( enableTweak ) {
+//	when tweak is enabled turn off tint in action sheets to allow for text color customisation
+		return NO;
+	}
+	return origValue;
 }
 %end
 
 %hook _UIAlertControllerInterfaceActionGroupView
-%new
 -(void)updateTraitOverride {
-	if ( enableTweak && uiStyle ) {
-		[self setOverrideUserInterfaceStyle:uiStyle];
+	if ( enableTweak ) {
+		if (isiOS13Up) {
+			if ([[self _viewControllerForAncestor] isKindOfClass:%c(UIAlertController)]) {
+				UIAlertController *alertController = [self _viewControllerForAncestor];
+				if ( uiStyleInAlert > 0 && alertController._resolvedStyle == 1 ) {
+					[self setOverrideUserInterfaceStyle:uiStyleInAlert];
+				}
+				if ( uiStyleInActionSheet > 0 && alertController._resolvedStyle == 0 ) {
+					[self setOverrideUserInterfaceStyle:uiStyleInActionSheet];
+				}
+			}
+		}
 	}
 }
 -(void)didMoveToWindow {
-	if (enableTweak && uiStyle > 0) {
-		[self setOverrideUserInterfaceStyle:uiStyle];
+	if ( enableTweak ) {
+		if (isiOS13Up) {
+			if ([[self _viewControllerForAncestor] isKindOfClass:%c(UIAlertController)]) {
+				UIAlertController *alertController = [self _viewControllerForAncestor];
+				if ( uiStyleInAlert > 0 && alertController._resolvedStyle == 1 ) {
+					[self setOverrideUserInterfaceStyle:uiStyleInAlert];
+				}
+				if ( uiStyleInActionSheet > 0 && alertController._resolvedStyle == 0 ) {
+					[self setOverrideUserInterfaceStyle:uiStyleInActionSheet];
+				}
+			}
+		}
 	}
 	%orig;
+}
+- (bool)_shouldShowSeparatorAboveActionsSequenceView {
+	bool origValue = %orig;
+	if ( enableTweak ) {
+		if (isiOS13Up) {
+			if ([[self _viewControllerForAncestor] isKindOfClass:%c(UIAlertController)]) {
+				UIAlertController *alertController = [self _viewControllerForAncestor];
+				if ( alertController._resolvedStyle == 1 && !showSeparatorsInAlert ) {
+					return NO;
+				}
+			}
+			if ([[self _viewControllerForAncestor] isKindOfClass:%c(UIAlertController)]) {
+				UIAlertController *alertController = [self _viewControllerForAncestor];
+				if ( alertController._resolvedStyle == 0 && !showSeparatorsInActionSheet ) {
+					return NO;
+				}
+			}
+		}
+	}
+	return origValue;
+}
+%end
+
+%hook UIAlertControllerVisualStyleAlert
++ (long long)interfaceActionPresentationStyle {
+	long long origValue = %orig;
+	if ( enableTweak && buttonsSizeAlert != 999 ) {
+		return buttonsSizeAlert;
+	}
+	return origValue;
+}
+- (id)titleLabelFont {
+	id origValue = %orig;
+	if ( enableTweak && titleLabelFontAlert > 0 ) {
+		return [UIFont systemFontOfSize:titleLabelFontAlert];
+	}
+	return origValue;
+}
+- (id)messageLabelFont {
+	id origValue = %orig;
+	if ( enableTweak && messageLabelFontAlert > 0 ) {
+		return [UIFont systemFontOfSize:messageLabelFontAlert];
+	}
+	return origValue;
 }
 %end
 
@@ -174,17 +238,72 @@ static void receivedNotification(CFNotificationCenterRef center, void *observer,
 	double origValue = %orig;
 	if ( enableTweak && squareCornersInAlert ) {
 		return 0;
-	} else {
-		return origValue;
 	}
+	return origValue;
 }
-- (id)newActionSeparatorViewForGroupViewState:(id)arg1 {
+- (id)titleLabelColor {
 	id origValue = %orig;
-	if ( enableTweak && removeSeparatorsInAlert ) {
-		return nil;
-	} else {
-		return origValue;
+//	Force title color in dark mode Alert so older, light-only applications will display text correctly
+	if ( enableTweak && uiStyleInAlert == 2 ) {
+		return UIColor.whiteColor;
 	}
+	return origValue;
+}
+- (id)messageLabelColor {
+	id origValue = %orig;
+//	Force message color in dark mode Alert so older, light-only applications will display text correctly
+	if ( enableTweak && uiStyleInAlert == 2 ) {
+		return UIColor.whiteColor;
+	}
+	return origValue;
+}
+%end
+
+%hook UIAlertControllerVisualStyleActionSheet
++ (long long)interfaceActionPresentationStyle {
+	long long origValue = %orig;
+	if ( enableTweak && buttonsSizeActionSheet != 999 ) {
+		return buttonsSizeActionSheet;
+	}
+	return origValue;
+}
+- (id)titleLabelFont {
+	id origValue = %orig;
+	if ( enableTweak && titleLabelFontActionSheet > 0 ) {
+		return [UIFont systemFontOfSize:titleLabelFontActionSheet];
+	}
+	return origValue;
+}
+- (id)messageLabelFont {
+	id origValue = %orig;
+	if ( enableTweak && messageLabelFontActionSheet > 0 ) {
+		return [UIFont systemFontOfSize:messageLabelFontActionSheet];
+	}
+	return origValue;
+}
+- (id)titleLabelColor {
+	id origValue = %orig;
+//	Force title color in dark mode Action Sheet so older, light-only applications will display text correctly
+	if ( enableTweak ) {
+		if ( uiStyleInActionSheet == 1 ) {
+			return UIColor.blackColor;
+		} else if ( uiStyleInActionSheet == 2 ) {
+			return UIColor.whiteColor;
+		}
+	}
+	return origValue;
+}
+- (id)messageLabelColor {
+	id origValue = %orig;
+//	Force message color in dark mode Action Sheet so older, light-only applications will display text correctly
+	if ( enableTweak ) {
+		if ( uiStyleInActionSheet == 1 ) {
+			return UIColor.blackColor;
+		} else if ( uiStyleInActionSheet == 2 ) {
+			return UIColor.whiteColor;
+		}
+	}
+	return origValue;
 }
 %end
 
@@ -199,30 +318,65 @@ static void receivedNotification(CFNotificationCenterRef center, void *observer,
 }
 %end
 
-%hook UIAlertControllerVisualStyleAlert
-- (id)titleLabelColor {
-//	Force title color in dark mode alert so older, light-only applications displays text correctly
-	if ( enableTweak && uiStyle == 2 ) {
-		return UIColor.whiteColor;
-	} else {
-		return %orig;
+%hook UIAlertAction
+- (long long)image {
+	long long origValue = %orig;
+	if ( enableTweak && !showIcons ) {
+		return nil;
 	}
+	return origValue;
 }
-- (id)messageLabelColor {
-//	Force message color in dark mode alert so older, light-only applications displays text correctly
-	if ( enableTweak && uiStyle == 2 ) {
-		return UIColor.whiteColor;
-	} else {
-		return %orig;
+%end
+
+%hook _UIInterfaceActionVibrantSeparatorView
+- (void)didMoveToWindow {
+	%orig;
+	if ( enableTweak ) {
+		if (isiOS13Up) {
+			if ([[self _viewControllerForAncestor] isKindOfClass:%c(UIAlertController)]) {
+				UIAlertController *alertController = [self _viewControllerForAncestor];
+				if ( alertController._resolvedStyle == 1 && !showSeparatorsInAlert ) {
+					[self setHidden:TRUE];
+				}
+				if ( alertController._resolvedStyle == 0 && !showSeparatorsInActionSheet ) {
+					[self setHidden:TRUE];
+				}
+			}
+		}
 	}
 }
 %end
 
+%hook _UIAlertControlleriOSActionSheetCancelBackgroundView
+- (id)initWithFrame:(CGRect)frame {
+	id origValue = %orig;
+	if (origValue) {
+		if ( enableTweak && uiStyleInActionSheet == 2 ) {
+			((UIView *)[origValue valueForKey:@"backgroundView"]).backgroundColor = [UIColor colorWithRed:0.24 green:0.24 blue:0.25 alpha:0.75];
+			((UIView *)[origValue valueForKey:@"highlightView"]).backgroundColor = [UIColor colorWithRed:0.24 green:0.24 blue:0.25 alpha:0.9];
+		}
+	}
+	return origValue;
+}
+%end
+
 %ctor {
-// Found in https://github.com/EthanRDoesMC/Dawn/commit/847cb5192dae9138a893e394da825e86be561a6b
-	if ([[[[NSProcessInfo processInfo] arguments] objectAtIndex:0] containsString:@"/Application"] || [[[[NSProcessInfo processInfo] arguments] objectAtIndex:0] containsString:@"SpringBoard.app"]) {
+//	https://old.reddit.com/r/jailbreak/comments/4yz5v5/questionremote_messages_not_enabling/d6rlh88/
+//	Found in https://github.com/EthanRDoesMC/Dawn/commit/847cb5192dae9138a893e394da825e86be561a6b
+	if (
+		[[[[NSProcessInfo processInfo] arguments] objectAtIndex:0] containsString:@"/Application"]
+		||
+		[[[[NSProcessInfo processInfo] arguments] objectAtIndex:0] containsString:@"SpringBoard.app"]
+	) {
 		SettingsChanged();
-		CFNotificationCenterAddObserver( CFNotificationCenterGetDarwinNotifyCenter(), NULL, receivedNotification, CFSTR("com.tomaszpoliszuk.alertcontroller.settingschanged"), NULL, CFNotificationSuspensionBehaviorDeliverImmediately);
-		%init; // == %init(_ungrouped);
+		CFNotificationCenterAddObserver(
+			CFNotificationCenterGetDarwinNotifyCenter(),
+			NULL,
+			receivedNotification,
+			CFSTR("com.tomaszpoliszuk.alertcontroller.settingschanged"),
+			NULL,
+			CFNotificationSuspensionBehaviorDeliverImmediately
+		);
+		%init;
 	}
 }
