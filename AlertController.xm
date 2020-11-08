@@ -113,9 +113,9 @@ static void receivedNotification(CFNotificationCenterRef center, void *observer,
 }
 - (long long)_resolvedStyle {
 	long long origValue = %orig;
-	if ( enableTweak && origValue == 1 ) {
+	if ( enableTweak && origValue == 1 && ( setAlertStyle == 0 || 1 ) ) {
 		return setAlertStyle;
-	} else if ( enableTweak && origValue == 0 ) {
+	} else if ( enableTweak && origValue == 0 && ( setActionSheetStyle == 0 || 1 ) ) {
 		return setActionSheetStyle;
 	}
 	return origValue;

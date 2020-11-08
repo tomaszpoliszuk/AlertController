@@ -2,7 +2,7 @@
 Control UX and UI of your Alerts and Action Sheets
 
 ## Compatibility
-For iOS 12 and above
+iOS 12 and above
 
 ## What you can do with this tweak:
 * Choose UI Style of Alerts and Action Sheet
