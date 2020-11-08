@@ -285,6 +285,12 @@
 		},
 		{
 			cell = PSButtonCell;
+			label = "Tomasz Poliszuk @ BigBoss";
+			action = TomaszPoliszukAtBigBoss;
+			icon = "icons/packages.png";
+		},
+		{
+			cell = PSButtonCell;
 			label = "Tomasz Poliszuk @ Github";
 			action = TomaszPoliszukAtGithub;
 			icon = "icons/github.png";

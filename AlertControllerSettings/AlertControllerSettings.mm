@@ -3,14 +3,14 @@
 
 #define isiOS13Up (kCFCoreFoundationVersionNumber >= 1665.15)
 
-NSString *domainString = @"com.tomaszpoliszuk.alertcontroller";
-
 @interface PSListController (AlertController)
 @end
 @interface AlertControllerSettings : PSListController {
 	NSMutableArray *removeSpecifiers;
 }
 @end
+
+NSString *const domainString = @"com.tomaszpoliszuk.alertcontroller";
 
 @implementation AlertControllerSettings
 - (NSArray *)specifiers {
@@ -28,6 +28,10 @@ NSString *domainString = @"com.tomaszpoliszuk.alertcontroller";
 		}
 	}
 	return _specifiers;
+}
+- (void)loadView {
+	[super loadView];
+	((UITableView *)[self table]).keyboardDismissMode = UIScrollViewKeyboardDismissModeInteractive;
 }
 - (void)showExampleAlert {
 	UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Title of Example Alert" message:@"This is message of example Alert feel free to ignore what is written here, more words to make it a litle bit longer. \n \n All glory Hypnotoad." preferredStyle:UIAlertControllerStyleAlert];
@@ -78,6 +82,12 @@ NSString *domainString = @"com.tomaszpoliszuk.alertcontroller";
 -(void)knownIssues {
 	NSURL *knownIssues = [NSURL URLWithString:@"https://github.com/tomaszpoliszuk/AlertController/issues"];
 	[[UIApplication sharedApplication] openURL:knownIssues options:@{} completionHandler:nil];
+}
+-(void)TomaszPoliszukAtBigBoss {
+	UIApplication *application = [UIApplication sharedApplication];
+	NSString *tweakName = @"Alert+Controller";
+	NSURL *twitterWebsite = [NSURL URLWithString:[@"http://apt.thebigboss.org/developer-packages.php?name=" stringByAppendingString:tweakName]];
+	[application openURL:twitterWebsite options:@{} completionHandler:nil];
 }
 -(void)TomaszPoliszukAtGithub {
 	UIApplication *application = [UIApplication sharedApplication];
